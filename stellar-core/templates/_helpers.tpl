@@ -130,6 +130,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 - name: QUORUM_SET
   value: {{ . | toJson | quote }}
 {{- end }}
+- name: AZURE_STORAGE_ACCOUNT
+  value: {{ .Values.azure.storageAccount }}
+- name: AZURE_STORAGE_KEY
+  value: {{ .Values.azure.storageKey }}
+- name: AZURE_STORAGE_AUTH_MODE
+  value: {{ .Values.azure.storageAuthMode }}
+- name: HISTORY_RETENTION_COUNT
+  value: {{ .Values.historyRetentionCount | quote }}
 {{- with .Values.history }}
 - name: HISTORY
   value: {{ . | toJson | quote }}

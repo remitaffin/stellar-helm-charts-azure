@@ -1,16 +1,3 @@
-## NOTE:
-## You have to provide a node seed
-##   * either by specifying nodeSeed directly
-##   * or by specifying existingNodeSeedSecret that points to an existing secret
-## You can generate a node seed by running the following command:
-##   docker run --rm -it --entrypoint '' satoshipay/stellar-core stellar-core --genseed
-
-## WARNING: make sure to replace this in your configuration or use existingNodeSeedSecret
-nodeSeed: SDUFQA7YL3KTWZNKOXX7XXIYU4R5R6JKELMREKHDQOYY2WPUGXFVJN52
-# existingNodeSeedSecret:
-#   name: stellar-core
-#   key: nodeSeed
-
 nodeIsValidator: true
 
 networkPassphrase: Public Global Stellar Network ; September 2015
@@ -55,6 +42,7 @@ history: {}
 
 initializeDatabase: true
 initializeHistoryArchives: false
+historyRetentionCount: 60480
 
 initCatchup:
   enabled: false
@@ -82,10 +70,9 @@ existingDatabase:
   # url: postgresql://dbname=stellar-core host=postgresql-core password=$(DATABASE_PASSWORD)
 
 image:
-  repository: satoshipay/stellar-core
+  repository: remitaffin/stellar-core-azure
   tag: '12.0.0'
-  # flavor: aws
-  # flavor: gcloud
+  flavor: azure
   pullPolicy: IfNotPresent
 
 peerService:
@@ -99,7 +86,7 @@ httpService:
   port: 11626
 
 metrics:
-  enabled: false
+  enabled: true
   # resources: {}
   service:
     type: ClusterIP
@@ -138,10 +125,7 @@ persistence:
   ## Annotations for the persistent volume claim
   # annotations:
 
-resources:
-  requests:
-    cpu: 100m
-    memory: 512Mi
+resources: {}
 
 nodeSelector: {}
 

@@ -1,0 +1,118 @@
+nodeIsValidator: true
+networkPassphrase: Public Global Stellar Network ; September 2015
+catchupRecent: 14400
+maxPeerConnections: 30
+knownPeers:
+  - au.stellar.ibm.com
+  - br.stellar.ibm.com
+  - ca.stellar.ibm.com
+  - no.stellar.ibm.com
+  - it.stellar.ibm.com
+  - hk.stellar.ibm.com
+  - in.stellar.ibm.com
+  - uk.stellar.ibm.com
+  - us.stellar.ibm.com
+  - stellar1.satoshipay.io
+  - stellar2.satoshipay.io
+  - stellar3.satoshipay.io
+  - core-live-a.stellar.org
+  - core-live-b.stellar.org
+  - core-live-c.stellar.org
+
+preferredPeerKeys:
+  - au.stellar.ibm.com
+  - br.stellar.ibm.com
+  - ca.stellar.ibm.com
+  - no.stellar.ibm.com
+  - it.stellar.ibm.com
+  - hk.stellar.ibm.com
+  - in.stellar.ibm.com
+  - uk.stellar.ibm.com
+  - us.stellar.ibm.com
+  - stellar1.satoshipay.io
+  - stellar2.satoshipay.io
+  - stellar3.satoshipay.io
+  - core-live-a.stellar.org
+  - core-live-b.stellar.org
+  - core-live-c.stellar.org
+
+nodeNames:
+  - name: ibm_au
+    publicKey: GCKWUQGSVO45ZV3QK7POYL7HMFWDKWJVMFVEGUJKCAEVUITUCTQWFSM6
+  - name: ibm_br
+    publicKey: GBUJA3Z5TLAKLI5MEH4TETLXJBQVSVW74MNEKP5UUHTP3IMLNSUPOTVA
+  - name: ibm_ca
+    publicKey: GB2HF2NHRKKFZYFDGD7MUENOYROOEK7SWYV2APYOODP6P7BUJTLILKIL
+  - name: ibm_no
+    publicKey: GDRA72H7JWXAXWJKOONQOPH3JKNSH5MQ6BO5K74C3X6FO2G3OG464BPU
+  - name: ibm_it
+    publicKey: GAEEH4TBR7YQQWKJ2FIT57HXZZTMK2BX5LY4POJUYFSEZ7Y2ONHPPTES
+  - name: ibm_hk
+    publicKey: GBJ7T3BTLX2BP3T5Q4256PUF7JMDAB35LLO32QRDYE67TDDMN7H33GGE
+  - name: ibm_in
+    publicKey: GCH3O5PTCZVR4G65W3B4XDKWI5V677HQB3QO7CW4YPVYDDFBE2GE7G6V
+  - name: ibm_uk
+    publicKey: GAENPO2XRTTMAJXDWM3E3GAALNLG4HVMKJ4QF525TR25RI42YPEDULOW
+  - name: ibm_us
+    publicKey: GARBCBH4YSHUJLYEPKEPMVYZIJ3ZSQR3QCJ245CWGY64X72JLN4A6RSG
+  - name: satoshipay1
+    publicKey: GC5SXLNAM3C4NMGK2PXK4R34B5GNZ47FYQ24ZIBFDFOCU6D4KBN4POAE
+  - name: satoshipay2
+    publicKey: GBJQUIXUO4XSNPAUT6ODLZUJRV2NPXYASKUBY4G5MYP3M47PCVI55MNT
+  - name: satoshipay3
+    publicKey: GAK6Z5UVGUVSEK6PEOCAYJISTT5EJBB34PN3NOLEQG2SUKXRVV2F6HZY
+  - name: sdf_watcher1
+    publicKey: GCGB2S2KGYARPVIA37HYZXVRM2YZUEXA6S33ZU5BUDC6THSB62LZSTYH
+  - name: sdf_watcher2
+    publicKey: GCM6QMP3DLRPTAZW2UZPCPX2LF3SXWXKPMP3GKFZBDSF3QZGV2G5QSTK
+  - name: sdf_watcher3
+    publicKey: GABMKJM6I25XI4K7U6XWMULOUQIQ27BCTMLS6BYYSOWKTBUXVRJSXHYQ
+
+quorumSet:
+  - threshold_percent: 66
+    validators:
+      - $$satoshipay1
+      - $$satoshipay2
+      - $$satoshipay3
+  - path: ibm
+    threshold_percent: 51
+    validators:
+      - $$ibm_au
+      - $$ibm_br
+      - $$ibm_ca
+      - $$ibm_no
+      - $$ibm_it
+      - $$ibm_hk
+      - $$ibm_in
+      - $$ibm_uk
+      - $$ibm_us
+  - path: sdf
+    threshold_percent: 51
+    validators:
+      - $$sdf_watcher1
+      - $$sdf_watcher2
+      - $$sdf_watcher3
+
+history:
+  sdf1:
+    get: "curl -sf https://history.stellar.org/prd/core-live/core_live_001/{0} -o {1}"
+  sdf2:
+    get: "curl -sf https://history.stellar.org/prd/core-live/core_live_002/{0} -o {1}"
+  sdf3:
+    get: "curl -sf https://history.stellar.org/prd/core-live/core_live_003/{0} -o {1}"
+  backup:
+    get: "curl https://historythewwallet.blob.core.windows.net/corelive001/{0} -o {1}"
+    put: "az storage blob upload -f {0} -c corelive001 -n {1}"
+
+initializeHistoryArchives: true
+historyRetentionCount: 60480
+
+initializeDatabase: true
+
+persistence:
+  size: 20Gi
+
+postgresql:
+  enabled: true
+  persistence:
+    size: 200Gi

@@ -10,7 +10,7 @@ helm dependency update stellar-core
 helm install \
   --namespace stellar-testnet \
   --name stellar-core \
-  --values stellar-core.testnet.values.yaml \
+  --values stellar-core.prodnet.values.yaml \
   stellar-core
 ```
 
@@ -22,6 +22,6 @@ helm dependency update stellar-horizon
 helm install \
   --namespace stellar-testnet \
   --name stellar-horizon \
-  --values stellar-horizon.testnet.values.yaml \
+  --values stellar-horizon.prodnet.values.yaml \
   stellar-horizon
 ```
